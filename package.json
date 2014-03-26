@@ -1,0 +1,13 @@
+{ "name"          :"ocolus-arduino",
+	"version"     :"0.0.1",
+	"description" :"",
+	"author"      :"Mauricio Sanchez and Mirte Becker",
+	"main"        :".server.js",
+	"dependencies":{
+		"serialport":"*",
+		"socket.io" :"*"
+	},
+	"engines"     :{
+		"node":"0.6"
+	}
+}
