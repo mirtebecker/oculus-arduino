@@ -1,5 +1,4 @@
-jQuery(document).ready(function() {
-
+jQuery(document).ready(function () {
 	var blocker = document.getElementById('blocker');
 	var instructions = document.getElementById('instructions');
 	// console.log(instructions);
@@ -52,5 +51,4 @@ jQuery(document).ready(function() {
 	} else {
 		instructions.innerHTML = 'Your Browser doesn\'t seem to support Pointer Lock API';
 	}
-	
 });
