@@ -90,20 +90,9 @@ Config = (function () {
 				this.plane.scale.x = this.plane.y = Math.random() * Math.random() * 1.5 + 0.5;
 				THREE.GeometryUtils.merge(this.geometry, this.plane);
 			}
-			var loader = new THREE.JSONLoader();
-			loader.load("js/model.js", function (geometry) {
-				var material = new THREE.MeshBasicMaterial({
-					color: 0xff0000,
-					wireframe: false
-				});
-				mesh = new THREE.Mesh(geometry, material);
-				this.scene.add(mesh);
-				this.objects.push(mesh);
-				// mesh.material.materials[0].side = 1;
-			});
-			var mesh = new THREE.Mesh(this.geometry, this.material);
+			var mesh = new THREE.Mesh(this.geometry, material);
 			this.scene.add(mesh);
-			mesh = new THREE.Mesh(this.geometry, this.material);
+			mesh = new THREE.Mesh(this.geometry, material);
 			mesh.position.z = -8000;
 			this.scene.add(mesh);
 			//renderer final settings
