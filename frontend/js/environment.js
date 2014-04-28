@@ -6,7 +6,7 @@ Environment = (function () {
 	// cube2.position.x = 400;
 	// Config.scene.add(cube2);
 	// this section is for loading models. Below is an example of terrain from blender
-	var loader = new THREE.JSONLoader();
+	// var loader = new THREE.JSONLoader();
 	loader.load("js/model.js", function (geometry) {
 		var material = new THREE.MeshBasicMaterial({
 			color: 0xff0000,
