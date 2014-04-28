@@ -13,6 +13,7 @@ Config = (function () {
 		ray: new THREE.Raycaster(),
 		timeNow: Date.now(),
 		objects: [],
+		gForce: '',
 		init: function () {
 			//basic three.js configs: Here is where you can set up the initial settings for the environment
 			this.renderer.setSize(this.WIDTH, this.HEIGHT);
@@ -54,6 +55,7 @@ Config = (function () {
 			this.renderer.render(this.scene, this.camera);
 			this.effect.render(this.scene, this.camera);
 			Logic.rotate();
+			console.log(this.gForce);
 		},
 		onWindowResize: function () {
 			this.camera.aspect = window.innerWidth / window.innerHeight;

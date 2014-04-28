@@ -15,7 +15,7 @@ Environment = (function () {
 		mesh = new THREE.Mesh(geometry, material);
 		Config.scene.add(mesh);
 		Config.objects.push(mesh);
-		mesh.material.materials[0].side = 1;
+		// mesh.material.materials[0].side = 1;
 	});
 	//Load custom geometry
 	// var loader = new THREE.JSONLoader();
