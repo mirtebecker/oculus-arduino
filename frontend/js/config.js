@@ -13,6 +13,7 @@ Config = (function () {
 		oculus: true,
 		// animate: null,
 		bodyAngle: 45,
+		material: null,
 		ray: new THREE.Raycaster(),
 		timeNow: Date.now(),
 		objects: [],
@@ -38,6 +39,7 @@ Config = (function () {
 			this.camera.position.y = 0;
 			this.camera.position.x = 0;
 			this.scene.add(this.camera);
+			//LIGHTS
 			var light = new THREE.PointLight(0xffffff);
 			light.position.set(-100, 200, 100);
 			light.intensity = 2;
@@ -51,13 +53,51 @@ Config = (function () {
 			controls = new THREE.FlyControls(this.camera);
 			controls.dragToLook = "true";
 			this.ray.ray.direction.set(0, -1, 0);
+			//
+			var hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1.25);
+			hemiLight.color.setHSL(0.6, 1, 0.75);
+			hemiLight.groundColor.setHSL(0.1, 0.8, 0.7);
+			hemiLight.position.y = 500;
+			this.scene.add(hemiLight);
+			//Let's create a background for our sky
+			var vertexShader = document.getElementById('vertexShader').textContent,
+				fragmentShader = document.getElementById('fragmentShader').textContent,
+				uniforms = {
+					topColor: {
+						type: "c",
+						value: new THREE.Color(0x0077ff)
+					},
+					bottomColor: {
+						type: "c",
+						value: new THREE.Color(0xffffff)
+					},
+					offset: {
+						type: "f",
+						value: 400
+					},
+					exponent: {
+						type: "f",
+						value: 0.6
+					}
+				};
+			uniforms.topColor.value.copy(hemiLight.color);
+			// this.scene.fog.color.copy(uniforms.bottomColor.value);
+			var skyGeo = new THREE.SphereGeometry(4000, 32, 15);
+			var skyMat = new THREE.ShaderMaterial({
+				vertexShader: vertexShader,
+				fragmentShader: fragmentShader,
+				uniforms: uniforms,
+				side: THREE.BackSide
+			});
+			var sky = new THREE.Mesh(skyGeo, skyMat);
+			this.scene.add(sky);
 			//Let's try to add some clouds
 			var texture = new THREE.ImageUtils.loadTexture('js/textures/cloud10.png', undefined, animate);
-			console.log(texture);
+			// console.log(texture);
 			texture.magFilter = THREE.LinearMipMapLinearFilter;
 			texture.minFilter = THREE.LinearMipMapLinearFilter;
 			//This needs to be defined in the scope of init() for some reason
-			var material = new THREE.ShaderMaterial({
+			material = new THREE.ShaderMaterial({
 				uniforms: {
 					"map": {
 						type: "t",
