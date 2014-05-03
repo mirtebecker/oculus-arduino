@@ -9,7 +9,7 @@ Logic = (function () {
 		},
 		move: function () {
 			Config.scene.children[0].position.z -= 0.05,
-			Config.scene.children[0].position.y -= 0.05;
+			Config.scene.children[0].position.y -= .5;
 		}
 	}
 })();

@@ -161,7 +161,6 @@ Config = (function () {
 			//Here I pass the function of the logic
 			Logic.rotate();
 			Logic.move();
-			// console.log(this.gForce);
 		},
 		onWindowResize: function () {
 			this.camera.aspect = window.innerWidth / window.innerHeight;
