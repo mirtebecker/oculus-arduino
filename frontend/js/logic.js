@@ -4,8 +4,12 @@ Logic = (function () {
 		//you can define scene logic here
 		rotate: function () {
 			if (Config.scene.children[2]) {
-				Config.scene.children[2].rotation.y += .0005;
+				Config.scene.children[2].rotation.y += .05;
 			}
+		},
+		move: function () {
+			Config.scene.children[0].position.z -= 0.05,
+			Config.scene.children[0].position.y -= 0.05;
 		}
 	}
 })();

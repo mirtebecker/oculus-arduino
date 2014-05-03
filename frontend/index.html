@@ -103,15 +103,18 @@
 	<!-- get everything up and running-->
 	<script type="text/javascript">
 		function animate(){
-	 
+	 	
+	 		
 	        Config.render();
 	 
 	        requestAnimationFrame(function(){
 	            animate();
 	        });
+	        // 
 	      }
 
 		Config.init();
+		console.log(Config.scene);
 		animate();
 	</script>
 

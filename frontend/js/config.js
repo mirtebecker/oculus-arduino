@@ -158,7 +158,9 @@ Config = (function () {
 			controls.update(1);
 			this.renderer.render(this.scene, this.camera);
 			this.effect.render(this.scene, this.camera);
+			//Here I pass the function of the logic
 			Logic.rotate();
+			Logic.move();
 			// console.log(this.gForce);
 		},
 		onWindowResize: function () {
