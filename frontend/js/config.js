@@ -3,7 +3,7 @@ Config = (function () {
 		WIDTH: window.innerWidth,
 		HEIGHT: window.innerHeight,
 		camera: new THREE.PerspectiveCamera(45, this.WIDTH / this.HEIGHT, 0.1, 2000),
-		scene: new THREE.Scene(),
+		scene: null,
 		renderer: new THREE.WebGLRenderer({
 			antialias: false
 		}),
@@ -34,6 +34,7 @@ Config = (function () {
 			context.fillRect(0, 0, canvas.width, canvas.height);
 			container.style.background = 'url(' + canvas.toDataURL('image/png') + ')';
 			container.style.backgroundSize = '32px 100%';
+			this.scene = new THREE.Scene();
 			//CAMERA
 			this.camera.position.z = 50;
 			this.camera.position.y = 0;
