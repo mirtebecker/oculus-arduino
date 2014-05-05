@@ -4,8 +4,7 @@
 	"author"      :"Mauricio Sanchez and Mirte Becker",
 	"main"        :".server.js",
 	"dependencies":{
-		"serialport":"*",
-		"socket.io" :"*"
+		"net" :"*"
 	},
 	"engines"     :{
 		"node":"0.6"

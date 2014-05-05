@@ -1,33 +1,37 @@
-var fs = require('fs');
-var url = require('url');
-var io = require('socket.io');
-/* Create the server in the port 8080 */
-var http = require('http').createServer(function (req, res) {
-	var request = url.parse(req.url, false);
-	var filename = request.pathname;
-	if (filename == "/") filename = "/index.html";
-	/* Append the frontend folder */
-	filename = 'frontend' + filename;
-	fs.readFile(filename, function (err, data) {
-		/* Any error on reading the file? */
-		if (err) {
-			if (err.errno == 34) // File not found
-				res.writeHead(404);
-			else res.writeHead(500);
-			res.end();
-			return;
-		}
-		res.writeHead(200);
-		res.write(data);
-		res.end();
-	});
-}).listen(8080);
-var socketServer = io.listen(http);
-socketServer.set('log level', 1);
-socketServer.sockets.on("connection", function (socket) {
-	// On a new Socket.io connection, load the data provider we want. For now, just Arduino.
-	// var $provider = require('./providers/arduino.js').init(socket);
-	socket.emit('news', {
-		hello: 'world'
-	});
+var net = require('net');
+var socket;
+ 
+var server = net.createServer(function(socket) {
+  socket.setEncoding('utf8');
+  
+  socket.on('connect', function() {
+    console.log(">>> received CONNECT");
+    console.log('WiFly connected with ip adress: ' + socket.remoteAddress);
+  });
+  
+  socket.on('error', function(data){
+    console.log("[EROR]");
+    console.log(data);
+  });
+
+  socket.on('end', function() {
+    console.log('Disconnected');
+  });
+
+  // socket.connect('connect', function(data){
+  //   console.log(">>> received CONNECT");
+  //   console.log("data: "+ data);
+  // })
+
+  socket.on('data', function(data) {
+    console.log(">>> received DATA!");
+    console.log(socket.remoteAddress + " sends: " + data);
+    socket.write("HTTP/1.1 101", function(data){
+      console.log("something: "+data);
+    });
+  });
+});
+ 
+server.listen(9001, function() { //'listening' listener
+  console.log('start WiFly test server...');
 });
