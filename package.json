@@ -4,7 +4,6 @@
 	"author"      :"Mauricio Sanchez and Mirte Becker",
 	"main"        :".server.js",
 	"dependencies":{
-		"net" :"*"
 	},
 	"engines"     :{
 		"node":"0.6"
