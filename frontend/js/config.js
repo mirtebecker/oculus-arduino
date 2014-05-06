@@ -8,8 +8,10 @@ Config = (function () {
 			antialias: false
 		}),
 		geometry: new THREE.Geometry(),
-		fog: new THREE.Fog(0x4584b4, -100, 3000),
+		geometry2: new THREE.Geometry(),
+		fog: new THREE.Fog(0xffffff, -100, 3000),
 		plane: new THREE.Mesh(new THREE.PlaneGeometry(64, 64)),
+		plane2: new THREE.Mesh(new THREE.PlaneGeometry(100, 100)),
 		oculus: true,
 		// animate: null,
 		bodyAngle: 45,
@@ -17,7 +19,7 @@ Config = (function () {
 		ray: new THREE.Raycaster(),
 		timeNow: Date.now(),
 		objects: [],
-		gForce: '',
+		zData: '',
 		init: function () {
 			//basic three.js configs: Here is where you can set up the initial settings for the environment
 			var container = document.createElement('div');
@@ -123,6 +125,7 @@ Config = (function () {
 				depthTest: false,
 				transparent: true
 			});
+			//This is the first placement of clouds
 			for (var i = 0; i < 8000; i++) {
 				this.plane.position.x = Math.random() * 1000 - 500;
 				this.plane.position.y = -Math.random() * Math.random() * 200 - 15;
@@ -136,6 +139,21 @@ Config = (function () {
 			mesh = new THREE.Mesh(this.geometry, material);
 			mesh.position.z = -8000;
 			this.scene.add(mesh);
+			//Second placement of clouds
+			for (var i = 0; i < 8000; i++) {
+				this.plane2.position.x = Math.random() * 10000 - 200;
+				this.plane2.position.y = -Math.random() * Math.random() * 2000 - 15;
+				this.plane2.position.z = i;
+				this.plane.rotation.z = Math.random() * Math.PI;
+				this.plane.scale.x = this.plane.y = Math.random() * Math.random() * 1.5 + 0.5;
+				THREE.GeometryUtils.merge(this.geometry2, this.plane2);
+			}
+			var mesh2 = new THREE.Mesh(this.geometry2, material);
+			this.scene.add(mesh2);
+			mesh2 = new THREE.Mesh(this.geometry2, material);
+			mesh2.position.z = -8000;
+			this.scene.add(mesh2);
+			//
 			//renderer final settings
 			this.renderer.setSize(this.WIDTH, this.HEIGHT);
 			this.renderer.setClearColor(0xffffff);
@@ -161,6 +179,7 @@ Config = (function () {
 			//Here I pass the function of the logic
 			Logic.rotate();
 			Logic.move();
+			// console.log(this.Zdata);
 		},
 		onWindowResize: function () {
 			this.camera.aspect = window.innerWidth / window.innerHeight;

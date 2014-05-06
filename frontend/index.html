@@ -19,7 +19,7 @@
 
 	<script type="text/javascript">
 
-	var xData = 0;
+	var zData = 0;
 
 	var socket = new WebSocket("ws://localhost:9002");
 	
@@ -29,8 +29,10 @@
 
 	socket.addEventListener("message", function(evt) {
 		var jsonMessage = JSON.parse(evt.data);
-		xData = jsonMessage.data;
-		console.log(xData);
+		zData = jsonMessage.data;
+		// console.log(zData);
+		Config.zData = zData;
+
 		//console.log("[WS] :: Message received! "+evt.data);
 	});
 
@@ -110,6 +112,8 @@
 	        requestAnimationFrame(function(){
 	            animate();
 	        });
+	        console.log(Config.zData);
+
 	    }
 
 		Config.init();

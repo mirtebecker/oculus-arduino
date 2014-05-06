@@ -8,8 +8,11 @@ Logic = (function () {
 			}
 		},
 		move: function () {
-			Config.scene.children[0].position.z -= 0.05,
-			Config.scene.children[0].position.y -= .5;
+			Config.scene.children[0].position.z -= Math.floor(Config.zData);
+			if (Math.floor(Config.zData) == 0) {
+				Config.scene.children[0].position.y -= .3;
+			}
+			// Config.scene.children[0].position.z
 		}
 	}
 })();
