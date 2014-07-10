@@ -23,13 +23,18 @@ var mimeTypes = {
   "js": "text/javascript",
   "css": "text/css"
 };
-http.createServer(function (req, res) {
+var proxy = http.createServer(function (req, res) {
   var fileToLoad;
   if (req.url == '/') {
     fileToLoad = 'index.html';
   } else {
     fileToLoad = url.parse(req.url).pathname.substr(1);
   }
+  // req.on("end", function () {
+  //   console.log("Connection has ended");
+  // });
+  // req.on("close", function () {
+  // });
   console.log('[HTTP] :: Loading :: ' + 'frontend/' + fileToLoad);
   var fileBytes;
   var httpStatusCode = 200;
@@ -45,7 +50,16 @@ http.createServer(function (req, res) {
     });
     res.end(fileBytes);
   });
+  // console.log("[INIT] Server running on HTTP Port");
 }).listen(HTTP_PORT);
+
+proxy.on("close", function(){
+  console.log("Connection has closed");
+});
+
+proxy.on("end", function(){
+  console.log("Connection has ended");
+});
 var socket;
 var clients = [];
 var server = net.createServer(function (socket) {
@@ -72,7 +86,7 @@ var server = net.createServer(function (socket) {
   });
 });
 server.listen(NET_PORT, function () {
-  console.log("[INIT] Server running on port", NET_PORT);
+  console.log("[INIT] Server running on NET server port", NET_PORT);
 });
 var WebSocketServer = require('ws').Server,
   wss = new WebSocketServer({
