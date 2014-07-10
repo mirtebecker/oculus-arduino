@@ -17,12 +17,12 @@ bool connect(const char *hostname, const char *path="/", uint16_t port=80);
 //SoftwareSerial wifiSerial(8,9);
 WiFly wifly;
 
-//const char mySSID[] = "Mirte's iPhone";
-const char mySSID[] = "mechanicalhuman";
-//const char myPassword[] = "helloworld";
-const char myPassword[] = "jorge2000";
+const char mySSID[] = "Mirte's iPhone";
+//const char mySSID[] = "mechanicalhuman";
+const char myPassword[] = "helloworld";
+//const char myPassword[] = "jorge2000";
 
-char server[] = "10.0.1.13";
+char server[] = "172.20.10.7";
 int port = 9001;
 
 boolean handshakeComplete = false;
@@ -171,7 +171,7 @@ bool connect(const char *hostname, const char *path, uint16_t port){
   wifly.println();
 
   /* Wait for the handshake response */
-  if (wifly.match(F("HTTP/1.1 101"), 1000)) {
+  if (wifly.match(F("HTTP/1.1 101"), 10000)) {
       Serial.println("connect: received handshake from server");
       wifly.println("connect: handshake complete");
 	wifly.flushRx(200);
