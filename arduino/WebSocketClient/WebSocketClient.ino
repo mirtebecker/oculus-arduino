@@ -171,7 +171,7 @@ bool connect(const char *hostname, const char *path, uint16_t port){
   wifly.println();
 
   /* Wait for the handshake response */
-  if (wifly.match(F("HTTP/1.1 101"), 10000)) {
+  if (wifly.match(F("HTTP/1.1 101"), 1000)) {
       Serial.println("connect: received handshake from server");
       wifly.println("connect: handshake complete");
 	wifly.flushRx(200);
